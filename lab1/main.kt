@@ -6,7 +6,7 @@ fun isEven(arg: Int?): String {
     
   	return if (arg % 2 == 0) "even" else "odd"
 }
-// task 1 bonus 1: extension property
+// task 1 bonus 1: extension function
 fun Int?.getEvennessType(): String = isEven(this) // getEvenness() is not allowed due to "evenness property" declared later
 // task 1 bonus 2: extension property
 val Int?.evenness: String get() = isEven(this)
