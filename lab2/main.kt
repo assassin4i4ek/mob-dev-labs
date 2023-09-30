@@ -86,12 +86,16 @@ class Department(
         // For sure it's an overkill, but I decided it's a fun challange
         managers
             .flatMap { mgr ->
+                // get manager and all his team as employees
 				sequence {
                 	yield(mgr)
                 	yieldAll(mgr.team)
             	}
         	}
+			.sortedWith(compareBy(Employee::name, Employee::surname)) // sort by name and surname
+            .distinct() // remove duplicated employees (just in case, it's odd for employee to have multiple managers)
             .map { emp ->
+                // prepare records (strings) of salary report
                 emp.run {
                     "$name $surname отримав(ла) ${NumUtils.format(countedSalary, 2)} шекєлей"
                 }
