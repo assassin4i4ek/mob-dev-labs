@@ -122,7 +122,7 @@ fun main() {
     val des3 = Designer("Aaron", "Ekhart", 1300, 3, 0.7)
     val des4 = Designer("Michael", "Cane", 1700, 20, 0.3)
     
-    val mgr2 = Manager("Robert", "Zemeckis", 1400, 8, mutableListOf(
+    val mgr2 = Manager("Christopher", "Nolan", 1400, 8, mutableListOf(
     	dev4, des2, des3, des4
     ))
         
