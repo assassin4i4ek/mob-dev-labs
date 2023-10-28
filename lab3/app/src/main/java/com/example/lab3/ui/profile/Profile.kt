@@ -28,10 +28,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.lab3.R
 import com.example.lab3.models.user.User
 import com.example.lab3.ui.theme.Lab3Theme
+import com.example.lab3.ui.utils.TranslatePreview
 import java.text.NumberFormat
 
 
@@ -39,7 +39,7 @@ import java.text.NumberFormat
 fun UserPhoto(image: Int, modifier: Modifier = Modifier) {
     Image(
         painter = painterResource(id = image),
-        contentDescription = "user photo",
+        contentDescription = stringResource(R.string.user_photo_cont_desc),
         modifier = Modifier
             .size(
                 width = dimensionResource(id = R.dimen.profile_user_photo_width),
@@ -145,7 +145,7 @@ fun UserDetails(
         UserDetailsItem(label = numPostsLabel) {
             Icon(
                 painter = painterResource(id = R.drawable.num_posts),
-                contentDescription = "number of posts",
+                contentDescription = stringResource(R.string.number_of_posts_cont_desc),
                 tint = MaterialTheme.colorScheme.secondary
             )
         }
@@ -157,7 +157,7 @@ fun UserDetails(
         UserDetailsItem(label = numFollowersLabel) {
             Icon(
                 painter = painterResource(id = R.drawable.num_followers),
-                contentDescription = "number of followers",
+                contentDescription = stringResource(R.string.number_of_followers_cont_desc),
                 tint = MaterialTheme.colorScheme.secondary
             )
         }
@@ -169,7 +169,7 @@ fun UserDetails(
         UserDetailsItem(label = numFollowingLabel) {
             Icon(
                 painter = painterResource(id = R.drawable.num_following),
-                contentDescription = "number of followings",
+                contentDescription = stringResource(R.string.number_of_followings_cont_desc),
                 tint = MaterialTheme.colorScheme.secondary
             )
         }
@@ -205,7 +205,7 @@ fun UserInfo(user: User, modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.width(iconSpacerWidth))
             Icon(
                 painter = painterResource(id = R.drawable.user_follow),
-                contentDescription = "follow user",
+                contentDescription = stringResource(R.string.follow_user_cont_desc),
                 modifier = Modifier.size(iconSize),
                 tint = MaterialTheme.colorScheme.primary
             )
@@ -262,8 +262,8 @@ fun Profile(user: User, modifier: Modifier = Modifier) {
 }
 
 
-@Preview
 @Composable
+@TranslatePreview
 fun ProfilePreview() {
     print(R.drawable.photo1)
     val testUser = User(

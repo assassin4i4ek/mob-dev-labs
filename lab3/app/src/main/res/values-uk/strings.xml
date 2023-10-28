@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_user_num_posts_label">%1$s дописів</string>
+    <string name="profile_user_num_followers_label">%1$s підписників</string>
+    <string name="profile_user_num_following_label">%1$s підписок</string>
+    <string name="number_of_followings_cont_desc">кількість підписок</string>
+    <string name="number_of_followers_cont_desc">кількість підписників</string>
+    <string name="number_of_posts_cont_desc">кількість дописів</string>
+    <string name="follow_user_cont_desc">підписатися</string>
+    <string name="user_photo_cont_desc">фото користувача</string>
+</resources>
