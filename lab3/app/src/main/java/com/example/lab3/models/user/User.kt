@@ -5,9 +5,9 @@ data class User(
     val name: String,
     val surname: String,
     val description: String,
-//    val imageUrl: String,
+//    val photo: String,
     // TODO implement url handling instead
-    val image: Int,
+    val photo: Int,
     val locationCountry: String,
     val locationCity: String,
     val numPosts: Int,

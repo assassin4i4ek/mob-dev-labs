@@ -31,7 +31,7 @@ fun ProfilePage(user: User, modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-            UserPhoto(image = user.image)
+            UserPhoto(photo = user.photo)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),

@@ -14,9 +14,9 @@ import com.example.lab3.R
 
 
 @Composable
-fun UserPhoto(image: Int, modifier: Modifier = Modifier) {
+fun UserPhoto(photo: Int, modifier: Modifier = Modifier) {
     Image(
-        painter = painterResource(id = image),
+        painter = painterResource(id = photo),
         contentDescription = stringResource(R.string.user_photo_cont_desc),
         modifier = Modifier
             .size(
