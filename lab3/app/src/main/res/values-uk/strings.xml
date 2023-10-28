@@ -8,4 +8,6 @@
     <string name="number_of_posts_cont_desc">кількість дописів</string>
     <string name="follow_user_cont_desc">підписатися</string>
     <string name="user_photo_cont_desc">фото користувача</string>
+    <string name="call_callee_photo_cont_desc">фото абонента</string>
+    <string name="call_state_calling">Виклик …</string>
 </resources>

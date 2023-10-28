@@ -10,7 +10,14 @@
     <dimen name="profile_follow_user_icon_padding_left">8dp</dimen>
     <dimen name="profile_user_description_padding_top">20dp</dimen>
     <dimen name="profile_user_description_padding_bottom">20dp</dimen>
-    <dimen name="profile_user_details_item_max_width">96dp</dimen>c
-    <dimen name="profile_user_details_icon_size">24dp</dimen>c
-    <dimen name="profile_user_details_icon_padding_bottom">8dp</dimen>c
+    <dimen name="profile_user_details_item_max_width">96dp</dimen>
+    <dimen name="profile_user_details_icon_size">24dp</dimen>
+    <dimen name="profile_user_details_icon_padding_bottom">8dp</dimen>
+    <dimen name="call_control_panel_padding_top">32dp</dimen>
+    <dimen name="call_control_panel_padding_bottom">72dp</dimen>
+    <dimen name="call_control_panel_button_size_medium">64dp</dimen>
+    <dimen name="call_control_panel_button_size_small">52dp</dimen>
+    <dimen name="call_control_panel_button_inner_padding">12dp</dimen>
+    <dimen name="call_control_panel_button_outer_padding">12dp</dimen>
+    <dimen name="call_control_panel_button_corner_size">20dp</dimen>
 </resources>

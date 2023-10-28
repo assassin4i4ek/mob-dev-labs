@@ -10,4 +10,7 @@
     <string name="number_of_posts_cont_desc">number of posts</string>
     <string name="follow_user_cont_desc">follow user</string>
     <string name="user_photo_cont_desc">user photo</string>
+    <string name="call_callee_photo_cont_desc">callee photo</string>
+    <string name="call_state_calling">Calling …</string>
+    <string name="call_callee_name" translatable="false">%1$s %2$s</string>
 </resources>
