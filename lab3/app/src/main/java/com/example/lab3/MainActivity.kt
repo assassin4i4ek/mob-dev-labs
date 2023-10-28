@@ -11,7 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.example.lab3.models.user.User
-import com.example.lab3.ui.profile.ProfilePage
+import com.example.lab3.ui.profile.ProfileScreen
 import com.example.lab3.ui.theme.Lab3Theme
 
 class MainActivity : ComponentActivity() {
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
                             )
                         )
                     }
-                    ProfilePage(user = user)
+                    ProfileScreen(user = user)
                 }
             }
         }

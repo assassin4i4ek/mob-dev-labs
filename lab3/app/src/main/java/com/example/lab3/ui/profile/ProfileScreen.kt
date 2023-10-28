@@ -16,7 +16,7 @@ import com.example.lab3.ui.utils.TranslatePreview
 
 
 @Composable
-fun ProfilePage(user: User, modifier: Modifier = Modifier) {
+fun ProfileScreen(user: User, modifier: Modifier = Modifier) {
     val globalPaddingTop = dimensionResource(id = R.dimen.profile_padding_top)
     val globalPaddingHor = dimensionResource(id = R.dimen.profile_padding_horizontal)
 
@@ -55,7 +55,7 @@ fun ProfilePage(user: User, modifier: Modifier = Modifier) {
 
 @Composable
 @TranslatePreview
-fun ProfilePagePreview() {
+fun ProfileScreenPreview() {
     print(R.drawable.photo1)
     val testUser = User(
         1L, "Emma", "Brony",
@@ -65,7 +65,7 @@ fun ProfilePagePreview() {
 
     Lab3Theme {
         Surface {
-            ProfilePage(user = testUser)
+            ProfileScreen(user = testUser)
         }
     }
 }
