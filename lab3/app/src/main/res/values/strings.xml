@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">lab3</string>
+    <string name="profile_user_name">%1$s %2$s</string>
+    <string name="profile_user_location">%2$s, %1$s</string>
+    <string name="profile_user_num_posts_label">%1$s posts</string>
+    <string name="profile_user_num_followers_label">%1$s followers</string>
+    <string name="profile_user_num_following_label">%1$s following</string>
+</resources>

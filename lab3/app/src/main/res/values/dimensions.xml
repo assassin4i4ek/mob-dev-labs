@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="profile_padding_top">72dp</dimen>
+    <dimen name="profile_padding_horizontal">16dp</dimen>
+    <dimen name="profile_user_photo_width">72dp</dimen>
+    <dimen name="profile_user_photo_height">72dp</dimen>
+    <dimen name="profile_user_name_padding_top">20dp</dimen>
+    <dimen name="profile_user_name_padding_bottom">0dp</dimen>
+    <dimen name="profile_follow_user_icon_size">24dp</dimen>
+    <dimen name="profile_follow_user_icon_padding_left">8dp</dimen>
+    <dimen name="profile_user_description_padding_top">20dp</dimen>
+    <dimen name="profile_user_description_padding_bottom">20dp</dimen>
+    <dimen name="profile_user_details_item_max_width">96dp</dimen>c
+    <dimen name="profile_user_details_icon_size">24dp</dimen>c
+    <dimen name="profile_user_details_icon_padding_bottom">8dp</dimen>c
+</resources>
