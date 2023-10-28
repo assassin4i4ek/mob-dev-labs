@@ -56,7 +56,6 @@ fun ProfileScreen(user: User, modifier: Modifier = Modifier) {
 @Composable
 @TranslatePreview
 fun ProfileScreenPreview() {
-    print(R.drawable.photo1)
     val testUser = User(
         1L, "Emma", "Brony",
         "My name is Emma. And I am collector of flowers.", R.drawable.photo1,
