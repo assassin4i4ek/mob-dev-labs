@@ -9,10 +9,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import com.example.lab3.models.user.User
-import com.example.lab3.ui.profile.Profile
+import com.example.lab3.ui.profile.ProfilePage
 import com.example.lab3.ui.theme.Lab3Theme
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +33,7 @@ class MainActivity : ComponentActivity() {
                             )
                         )
                     }
-                    Profile(user = user)
+                    ProfilePage(user = user)
                 }
             }
         }
