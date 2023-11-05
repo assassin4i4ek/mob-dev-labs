@@ -4,7 +4,7 @@ import com.example.lab4.models.employee.base.Employee
 import com.example.lab4.models.employee.base.props.Salary
 import com.example.lab4.models.employee.impl.Designer
 import com.example.lab4.models.employee.impl.Developer
-import com.example.lab4.models.utils.props.toBigDec
+import com.example.lab4.models.utils.props.toBigDecimal
 
 
 class SalaryCalculatorImpl: SalaryCalculator {
@@ -31,8 +31,12 @@ class SalaryCalculatorImpl: SalaryCalculator {
         val baseSalary = employee.baseSalary.value
         val experience = employee.experience.value
         val countedSalary = when {
-            experience > 5.toBigDec() -> baseSalary + 200.toBigDec()
-            experience > 2.toBigDec() -> baseSalary * "1.2".toBigDec() + 200.toBigDec()
+            experience > 5.toBigDecimal() -> {
+                baseSalary + 200.toBigDecimal(true)
+            }
+            experience > 2.toBigDecimal() -> {
+                baseSalary * "1.2".toBigDecimal(true) + 200.toBigDecimal(true)
+            }
             else -> baseSalary
         }
 
