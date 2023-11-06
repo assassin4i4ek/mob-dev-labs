@@ -12,9 +12,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.example.lab4.models.employee.base.Employee
+import com.example.lab4.models.employee.base.props.Salary
 import com.example.lab4.models.salary.SalaryCalculator
 import com.example.lab4.models.salary.SalaryCalculatorImpl
-import com.example.lab4.ui.employee.EmployeeScreen
+import com.example.lab4.ui.salary.SalaryScreen
 import com.example.lab4.ui.theme.Lab4Theme
 
 class MainActivity : ComponentActivity() {
@@ -22,6 +23,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             var employee: Employee? by remember {
+                mutableStateOf(null)
+            }
+            var calculatedSalary: Salary? by remember {
                 mutableStateOf(null)
             }
             val salaryCalc: SalaryCalculator = remember {
@@ -34,13 +38,17 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    EmployeeScreen(
-                        employee = employee,
-                        salaryCalculator = salaryCalc,
-                        onNewEmployee = {
-                            employee = it
-                        }
-                    )
+//                    EmployeeScreen(
+//                        employee = employee,
+//                        salaryCalculator = salaryCalc,
+//                        onNewEmployee = {
+//                            employee = it
+//                        },
+//                        onNewCalculatedSalary = {
+//                            calculatedSalary = it
+//                        }
+//                    )
+                    SalaryScreen(salary = Salary(500.toBigDecimal()))
                 }
             }
         }

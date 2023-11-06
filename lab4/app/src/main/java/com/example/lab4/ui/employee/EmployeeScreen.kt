@@ -45,7 +45,8 @@ import java.math.BigDecimal
 fun EmployeeScreen(
     employee: Employee?,
     salaryCalculator: SalaryCalculator,
-    onNewEmployee: (Employee) -> Unit
+    onNewEmployee: (Employee) -> Unit,
+    onNewCalculatedSalary: (Salary) -> Unit
 ) {
     /* Util functions */
     fun isValidBigDecimalProp(value: String, validate: (BigDecimal) -> Boolean): Boolean {
@@ -140,8 +141,9 @@ fun EmployeeScreen(
                             efficiency = Efficiency(efficiencyText.toBigDecimal())
                         )
                     }
-                    salaryCalculator.getSalary(newEmployee)
+                    val calculatedSalary = salaryCalculator.getSalary(newEmployee)
                     onNewEmployee(newEmployee)
+                    onNewCalculatedSalary(calculatedSalary)
                 },
                 enabled = canGetSalary
             )
@@ -334,8 +336,12 @@ fun EmployeeScreenPreview() {
 
     Lab4Theme {
         Surface {
-//            EmployeeScreen(employee = null)
-            EmployeeScreen(employee = employee, salaryCalculator = calc, onNewEmployee = {})
+            EmployeeScreen(
+                employee = employee,
+                salaryCalculator = calc,
+                onNewEmployee = {},
+                onNewCalculatedSalary = {}
+            )
         }
     }
 }
