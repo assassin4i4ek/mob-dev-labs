@@ -2,7 +2,7 @@ package com.example.lab4.models.utils.props
 
 import java.math.BigDecimal
 
-object BigDecimals {
+object BigDecimalCache {
     // TODO limit cache size
     private val cache: MutableMap<String, BigDecimal> = mutableMapOf()
 
@@ -12,8 +12,9 @@ object BigDecimals {
 }
 
 fun String.toBigDecimal(cached: Boolean = false): BigDecimal {
-    return if (cached) BigDecimals.cached(this) else BigDecimal(this)
+    return if (cached) BigDecimalCache.cached(this) else BigDecimal(this)
 }
+
 
 fun Int.toBigDecimal(cached: Boolean = false): BigDecimal {
     return this.toString().toBigDecimal(cached)
