@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
@@ -32,13 +33,20 @@ import com.example.lab4.models.employee.base.props.Efficiency
 import com.example.lab4.models.employee.base.props.Experience
 import com.example.lab4.models.employee.base.props.Salary
 import com.example.lab4.models.employee.impl.Designer
+import com.example.lab4.models.employee.impl.Developer
+import com.example.lab4.models.salary.SalaryCalculator
+import com.example.lab4.models.salary.SalaryCalculatorImpl
 import com.example.lab4.models.utils.props.toBigDecimal
 import com.example.lab4.ui.theme.Lab4Theme
 import com.example.lab4.ui.utils.TranslatePreview
 import java.math.BigDecimal
 
 @Composable
-fun EmployeeScreen(employee: Employee?) {
+fun EmployeeScreen(
+    employee: Employee?,
+    salaryCalculator: SalaryCalculator,
+    onNewEmployee: (Employee) -> Unit
+) {
     /* Util functions */
     fun isValidBigDecimalProp(value: String, validate: (BigDecimal) -> Boolean): Boolean {
         return value.toBigDecimalOrNull()?.let(validate)?: false
@@ -70,9 +78,17 @@ fun EmployeeScreen(employee: Employee?) {
     var isEfficiencyValid by rememberSaveable {
         mutableStateOf(true)
     }
-    val showEfficiency by remember {
+    val applyEfficiency by remember {
         derivedStateOf {
             employeeType in arrayOf(EmployeeType.DESIGNER)
+        }
+    }
+
+    val canGetSalary by remember {
+        derivedStateOf {
+            isBaseSalaryValid and isExperienceValid and isEfficiencyValid and
+                    baseSalaryText.isNotEmpty() and experienceText.isNotEmpty() and
+                    (!applyEfficiency or efficiencyText.isNotEmpty())
         }
     }
 
@@ -102,7 +118,7 @@ fun EmployeeScreen(employee: Employee?) {
                     efficiencyText = it
                     isEfficiencyValid = isValidBigDecimalProp(it, Efficiency::isValid)
                 },
-                visible = showEfficiency,
+                visible = applyEfficiency,
                 isError = !isEfficiencyValid
             )
             EmployeeTypeSwitch(
@@ -110,6 +126,24 @@ fun EmployeeScreen(employee: Employee?) {
                 onTypeChange = {
                     employeeType = it
                 }
+            )
+            GetSalaryButton(
+                onClick = {
+                    val newEmployee: Employee = when(employeeType) {
+                        EmployeeType.DEVELOPER -> Developer(
+                            baseSalary = Salary(baseSalaryText.toBigDecimal()),
+                            experience = Experience(experienceText.toBigDecimal())
+                        )
+                        EmployeeType.DESIGNER -> Designer(
+                            baseSalary = Salary(baseSalaryText.toBigDecimal()),
+                            experience = Experience(experienceText.toBigDecimal()),
+                            efficiency = Efficiency(efficiencyText.toBigDecimal())
+                        )
+                    }
+                    salaryCalculator.getSalary(newEmployee)
+                    onNewEmployee(newEmployee)
+                },
+                enabled = canGetSalary
             )
         }
     }
@@ -143,9 +177,14 @@ fun BaseTextField(
             label = {
                 Text(label)
             },
-            supportingText = if (!isError) null else { {
-                Text(errorText)
-            } },
+            supportingText = {
+                if (isError) {
+                    Text(errorText)
+                }
+                else {
+                    Text("")
+                }
+            },
             isError = isError,
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = keyboardType),
             singleLine = true
@@ -243,7 +282,10 @@ fun EmployeeTypeSwitch(
     onTypeChange: (EmployeeType) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = Modifier.then(modifier)) {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .padding(bottom = 32.dp)
+        .then(modifier)) {
         RadioButtonLabeled(
             selected = type == EmployeeType.DEVELOPER,
             onSelect = { onTypeChange(EmployeeType.DEVELOPER) },
@@ -259,6 +301,28 @@ fun EmployeeTypeSwitch(
 
 
 @Composable
+fun GetSalaryButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
+) {
+    Column (
+        modifier = Modifier
+            .fillMaxWidth()
+            .then(modifier),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(
+            onClick = onClick,
+            enabled = enabled
+        ) {
+            Text("Get salary")
+        }
+    }
+}
+
+
+@Composable
 @TranslatePreview
 fun EmployeeScreenPreview() {
     val employee = Designer(
@@ -266,10 +330,13 @@ fun EmployeeScreenPreview() {
         experience = Experience("4.5".toBigDecimal()),
         efficiency = Efficiency("0.8".toBigDecimal())
     )
+    val calc = SalaryCalculatorImpl()
+
     Lab4Theme {
         Surface {
 //            EmployeeScreen(employee = null)
-            EmployeeScreen(employee = employee)
+            EmployeeScreen(employee = employee, salaryCalculator = calc, onNewEmployee = {})
         }
     }
 }
+
