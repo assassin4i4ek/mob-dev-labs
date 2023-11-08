@@ -9,8 +9,8 @@ enum class SalaryCategory {
         fun forSalary(salary: Salary): SalaryCategory {
             return when {
                 salary.value <= 1000.toBigDecimal(cached = true) -> JUNIOR
-                salary.value <= 2000.toBigDecimal(cached = true) -> JUNIOR
-                salary.value <= 3000.toBigDecimal(cached = true) -> JUNIOR
+                salary.value <= 2000.toBigDecimal(cached = true) -> MIDDLE
+                salary.value <= 3000.toBigDecimal(cached = true) -> SENIOR
                 else -> OLIGARCH
             }
         }

@@ -22,7 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,8 +54,8 @@ fun SalaryScreen(salary: Salary, onReturnClick: () -> Unit) {
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SalaryDisplay(salary: Salary, modifier: Modifier = Modifier) {
-    var isSalaryHidden by rememberSaveable {
-        mutableStateOf(false)
+    var isSalaryHidden by remember(salary) {
+        mutableStateOf(true)
     }
 
     Column(
