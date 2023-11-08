@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="employee_screen_padding_horizontal">16dp</dimen>
+    <dimen name="employee_screen_padding_vertical">64dp</dimen>
+    <dimen name="employee_screen_text_field_padding_bottom">16dp</dimen>
+    <dimen name="employee_screen_employee_type_switch_padding_bottom">32dp</dimen>
+    <dimen name="salary_screen_padding_top">192dp</dimen>
+    <dimen name="salary_screen_padding_horizontal">16dp</dimen>
+    <dimen name="salary_screen_padding_bottom">64dp</dimen>
+    <dimen name="salary_screen_salary_display_height">256dp</dimen>
+    <dimen name="salary_screen_salary_display_image_padding">32dp</dimen>
+    <dimen name="salary_screen_salary_display_value_padding_horizontal">48dp</dimen>
+    <dimen name="salary_screen_salary_display_value_padding_vertical">24dp</dimen>
+</resources>

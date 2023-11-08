@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="employee_screen_base_salary_input_label">Базована зарплата</string>
+    <string name="employee_screen_base_salary_input_error_text">Значення має бути невід\'ємним числом</string>
+    <string name="employee_screen_experience_input_label">Досвід</string>
+    <string name="employee_screen_experience_input_error_text">Значення має бути невід\'ємним числом</string>
+    <string name="employee_screen_efficiency_input_label">Ефективність</string>
+    <string name="employee_screen_efficiency_input_error_text">Значення має бути між 0 та 1</string>
+    <string name="employee_screen_employee_type_developer">Розробник</string>
+    <string name="employee_screen_employee_type_designer">Дизайнер</string>
+    <string name="employee_screen_get_salary_button_label">Отримати зарплату</string>
+    <string name="salary_screen_salary_category_junior_label">Джуніор</string>
+    <string name="salary_screen_salary_category_middle_label">Мідл</string>
+    <string name="salary_screen_salary_category_senior_label">Сеньйор</string>
+    <string name="salary_screen_salary_category_oligarch_label">Олігарх</string>
+    <string name="salary_screen_return_button_label">Назад</string>
+</resources>

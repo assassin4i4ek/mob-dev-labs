@@ -25,8 +25,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.dp
+import com.example.lab4.R
 import com.example.lab4.models.employee.base.Employee
 import com.example.lab4.models.employee.base.EmployeeWithEfficiency
 import com.example.lab4.models.employee.base.props.Efficiency
@@ -93,61 +95,64 @@ fun EmployeeScreen(
         }
     }
 
-    Surface(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp, 64.dp)) {
-        Column {
-            BaseSalaryInput(
-                value = baseSalaryText,
-                onValueChange = {
-                    baseSalaryText = it
-                    isBaseSalaryValid = isValidBigDecimalProp(it, Salary::isValid)
-                },
-                isError = !isBaseSalaryValid
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                horizontal = dimensionResource(id = R.dimen.employee_screen_padding_horizontal),
+                vertical = dimensionResource(id = R.dimen.employee_screen_padding_vertical)
             )
-            ExperienceInput(
-                value = experienceText,
-                onValueChange = {
-                    experienceText = it
-                    isExperienceValid = isValidBigDecimalProp(it, Experience::isValid)
-                },
-                isError = !isExperienceValid
-            )
-            EfficiencyInput(
-                value = efficiencyText,
-                onValueChange = {
-                    efficiencyText = it
-                    isEfficiencyValid = isValidBigDecimalProp(it, Efficiency::isValid)
-                },
-                visible = applyEfficiency,
-                isError = !isEfficiencyValid
-            )
-            EmployeeTypeSwitch(
-                type = employeeType,
-                onTypeChange = {
-                    employeeType = it
+    ) {
+        BaseSalaryInput(
+            value = baseSalaryText,
+            onValueChange = {
+                baseSalaryText = it
+                isBaseSalaryValid = isValidBigDecimalProp(it, Salary::isValid)
+            },
+            isError = !isBaseSalaryValid
+        )
+        ExperienceInput(
+            value = experienceText,
+            onValueChange = {
+                experienceText = it
+                isExperienceValid = isValidBigDecimalProp(it, Experience::isValid)
+            },
+            isError = !isExperienceValid
+        )
+        EfficiencyInput(
+            value = efficiencyText,
+            onValueChange = {
+                efficiencyText = it
+                isEfficiencyValid = isValidBigDecimalProp(it, Efficiency::isValid)
+            },
+            visible = applyEfficiency,
+            isError = !isEfficiencyValid
+        )
+        EmployeeTypeSwitch(
+            type = employeeType,
+            onTypeChange = {
+                employeeType = it
+            }
+        )
+        GetSalaryButton(
+            onClick = {
+                val newEmployee: Employee = when(employeeType) {
+                    EmployeeType.DEVELOPER -> Developer(
+                        baseSalary = Salary(baseSalaryText.toBigDecimal()),
+                        experience = Experience(experienceText.toBigDecimal())
+                    )
+                    EmployeeType.DESIGNER -> Designer(
+                        baseSalary = Salary(baseSalaryText.toBigDecimal()),
+                        experience = Experience(experienceText.toBigDecimal()),
+                        efficiency = Efficiency(efficiencyText.toBigDecimal())
+                    )
                 }
-            )
-            GetSalaryButton(
-                onClick = {
-                    val newEmployee: Employee = when(employeeType) {
-                        EmployeeType.DEVELOPER -> Developer(
-                            baseSalary = Salary(baseSalaryText.toBigDecimal()),
-                            experience = Experience(experienceText.toBigDecimal())
-                        )
-                        EmployeeType.DESIGNER -> Designer(
-                            baseSalary = Salary(baseSalaryText.toBigDecimal()),
-                            experience = Experience(experienceText.toBigDecimal()),
-                            efficiency = Efficiency(efficiencyText.toBigDecimal())
-                        )
-                    }
-                    val calculatedSalary = salaryCalculator.getSalary(newEmployee)
-                    onNewEmployee(newEmployee)
-                    onNewCalculatedSalary(calculatedSalary)
-                },
-                enabled = canGetSalary
-            )
-        }
+                val calculatedSalary = salaryCalculator.getSalary(newEmployee)
+                onNewEmployee(newEmployee)
+                onNewCalculatedSalary(calculatedSalary)
+            },
+            enabled = canGetSalary
+        )
     }
 }
 
@@ -164,6 +169,10 @@ fun BaseTextField(
     errorText: String = "",
     keyboardType: KeyboardType = KeyboardType.Number
 ) {
+    val paddingBottom = dimensionResource(
+        id = R.dimen.employee_screen_text_field_padding_bottom
+    )
+
     AnimatedVisibility(
         visible = visible,
         enter = expandVertically(),
@@ -174,7 +183,7 @@ fun BaseTextField(
             onValueChange = onValueChange,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 16.dp)
+                .padding(bottom = paddingBottom)
                 .then(modifier),
             label = {
                 Text(label)
@@ -209,8 +218,8 @@ fun BaseSalaryInput(
         modifier = modifier,
         visible = visible,
         isError = isError,
-        label = "Base Salary",
-        errorText = "Value must be non-negative decimal"
+        label = stringResource(R.string.employee_screen_base_salary_input_label),
+        errorText = stringResource(R.string.employee_screen_base_salary_input_error_text)
     )
 }
 
@@ -229,8 +238,8 @@ fun ExperienceInput(
         modifier = modifier,
         visible = visible,
         isError = isError,
-        label = "Experience",
-        errorText = "Value must be non-negative decimal"
+        label = stringResource(R.string.employee_screen_experience_input_label),
+        errorText = stringResource(R.string.employee_screen_experience_input_error_text)
     )
 }
 
@@ -249,8 +258,8 @@ fun EfficiencyInput(
         modifier = modifier,
         visible = visible,
         isError = isError,
-        label = "Efficiency",
-        errorText = "Value must be between 0 and 1"
+        label = stringResource(R.string.employee_screen_efficiency_input_label),
+        errorText = stringResource(R.string.employee_screen_efficiency_input_error_text)
     )
 }
 
@@ -284,19 +293,23 @@ fun EmployeeTypeSwitch(
     onTypeChange: (EmployeeType) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val paddingBottom = dimensionResource(
+        id = R.dimen.employee_screen_employee_type_switch_padding_bottom
+    )
+
     Column(modifier = Modifier
         .fillMaxWidth()
-        .padding(bottom = 32.dp)
+        .padding(bottom = paddingBottom)
         .then(modifier)) {
         RadioButtonLabeled(
             selected = type == EmployeeType.DEVELOPER,
             onSelect = { onTypeChange(EmployeeType.DEVELOPER) },
-            label = "Developer"
+            label = stringResource(R.string.employee_screen_employee_type_developer)
         )
         RadioButtonLabeled(
             selected = type == EmployeeType.DESIGNER,
             onSelect = { onTypeChange(EmployeeType.DESIGNER) },
-            label = "Designer"
+            label = stringResource(R.string.employee_screen_employee_type_designer)
         )
     }
 }
@@ -318,7 +331,7 @@ fun GetSalaryButton(
             onClick = onClick,
             enabled = enabled
         ) {
-            Text("Get salary")
+            Text(stringResource(R.string.employee_screen_get_salary_button_label))
         }
     }
 }

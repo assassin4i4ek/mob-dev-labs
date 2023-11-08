@@ -10,7 +10,6 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,8 +25,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import com.example.lab4.R
 import com.example.lab4.models.employee.base.props.Salary
 import com.example.lab4.models.employee.base.props.SalaryCategory
@@ -39,14 +39,19 @@ import com.example.lab4.ui.utils.clickableNoRipple
 
 @Composable
 fun SalaryScreen(salary: Salary, onReturnClick: () -> Unit) {
-    Surface(modifier = Modifier
+    val paddingTop = dimensionResource(id = R.dimen.salary_screen_padding_top)
+    val paddingHorizontal = dimensionResource(id = R.dimen.salary_screen_padding_horizontal)
+    val paddingBottom = dimensionResource(id = R.dimen.salary_screen_padding_bottom)
+
+    Column(modifier = Modifier
         .fillMaxSize()
-        .padding(16.dp, 64.dp)) {
-        Column {
-            Spacer(modifier = Modifier.height(128.dp))
-            SalaryDisplay(salary)
-            ReturnButton(onClick = onReturnClick)
-        }
+        .padding(
+            start = paddingHorizontal, top = paddingTop,
+            end = paddingHorizontal, bottom = paddingBottom
+        )
+    ) {
+        SalaryDisplay(salary)
+        ReturnButton(onClick = onReturnClick)
     }
 }
 
@@ -61,7 +66,8 @@ fun SalaryDisplay(salary: Salary, modifier: Modifier = Modifier) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(256.dp)
+            .height(dimensionResource(id = R.dimen.salary_screen_salary_display_height))
+            .padding()
             .then(modifier),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -104,10 +110,12 @@ fun HiddenSalaryItem(
     onClick: () -> Unit = {}
 ) {
     val salaryCategory = when(SalaryCategory.forSalary(salary)) {
-        SalaryCategory.JUNIOR -> "Junior"
-        SalaryCategory.MIDDLE -> "Middle"
-        SalaryCategory.SENIOR -> "Senior"
-        SalaryCategory.OLIGARCH -> "Oligarch"
+        SalaryCategory.JUNIOR -> stringResource(R.string.salary_screen_salary_category_junior_label)
+        SalaryCategory.MIDDLE -> stringResource(R.string.salary_screen_salary_category_middle_label)
+        SalaryCategory.SENIOR -> stringResource(R.string.salary_screen_salary_category_senior_label)
+        SalaryCategory.OLIGARCH -> stringResource(
+            id = R.string.salary_screen_salary_category_oligarch_label
+        )
     }
 
     Column(
@@ -127,7 +135,7 @@ fun HiddenSalaryItem(
             modifier = Modifier
                 .fillMaxSize()
                 .clickableNoRipple(onClick)
-                .padding(32.dp)
+                .padding(dimensionResource(id = R.dimen.salary_screen_salary_display_image_padding))
         )
     }
 }
@@ -139,6 +147,13 @@ fun VisibleSalaryItem(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
+    val paddingHorizontal = dimensionResource(
+        id = R.dimen.salary_screen_salary_display_value_padding_horizontal
+    )
+    val paddingVertical = dimensionResource(
+        id = R.dimen.salary_screen_salary_display_value_padding_vertical
+    )
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -150,7 +165,10 @@ fun VisibleSalaryItem(
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier
                 .clickableNoRipple(onClick)
-                .padding(horizontal = 48.dp, vertical = 24.dp)
+                .padding(
+                    horizontal = paddingHorizontal,
+                    vertical = paddingVertical
+                )
         )
     }
 }
@@ -168,7 +186,7 @@ fun ReturnButton(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(onClick = onClick) {
-            Text("Return")
+            Text(stringResource(R.string.salary_screen_return_button_label))
         }
     }
 }

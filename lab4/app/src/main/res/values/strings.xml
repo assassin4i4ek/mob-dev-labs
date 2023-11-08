@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">lab4</string>
+    <string name="app_name" translatable="false">lab4</string>
+    <string name="employee_screen_base_salary_input_label">Base Salary</string>
+    <string name="employee_screen_base_salary_input_error_text">Value must be non-negative decimal</string>
+    <string name="employee_screen_experience_input_label">Experience</string>
+    <string name="employee_screen_experience_input_error_text">Value must be non-negative decimal</string>
+    <string name="employee_screen_efficiency_input_label">Efficiency</string>
+    <string name="employee_screen_efficiency_input_error_text">Value must be between 0 and 1</string>
+    <string name="employee_screen_employee_type_developer">Developer</string>
+    <string name="employee_screen_employee_type_designer">Designer</string>
+    <string name="employee_screen_get_salary_button_label">Get salary</string>
+    <string name="salary_screen_salary_category_junior_label">Junior</string>
+    <string name="salary_screen_salary_category_middle_label">Middle</string>
+    <string name="salary_screen_salary_category_senior_label">Senior</string>
+    <string name="salary_screen_salary_category_oligarch_label">Oligarch</string>
+    <string name="salary_screen_return_button_label">Return</string>
 </resources>
