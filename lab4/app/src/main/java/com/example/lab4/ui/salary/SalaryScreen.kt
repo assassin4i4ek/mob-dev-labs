@@ -1,5 +1,12 @@
 package com.example.lab4.ui.salary
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.AnimationConstants
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.with
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,6 +53,7 @@ fun SalaryScreen(salary: Salary) {
 }
 
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SalaryDisplay(salary: Salary, modifier: Modifier = Modifier) {
     var isSalaryHidden by rememberSaveable {
@@ -59,21 +67,33 @@ fun SalaryDisplay(salary: Salary, modifier: Modifier = Modifier) {
             .then(modifier),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (isSalaryHidden) {
-            HiddenSalaryItem(
-                salary = salary,
-                onClick = {
-                    isSalaryHidden = false
-                }
-            )
-        }
-        else {
-            VisibleSalaryItem(
-                salary = salary,
-                onClick = {
-                    isSalaryHidden = true
-                }
-            )
+        AnimatedContent(
+            targetState = isSalaryHidden,
+            transitionSpec = {
+                val enter = scaleIn(
+                    animationSpec = tween(delayMillis = AnimationConstants.DefaultDurationMillis)
+                )
+                val exit = scaleOut()
+                enter with exit
+            },
+            label = "salary"
+        ) {targetIsSalaryHidden ->
+            if (targetIsSalaryHidden) {
+                HiddenSalaryItem(
+                    salary = salary,
+                    onClick = {
+                        isSalaryHidden = false
+                    }
+                )
+            }
+            else {
+                VisibleSalaryItem(
+                    salary = salary,
+                    onClick = {
+                        isSalaryHidden = true
+                    }
+                )
+            }
         }
     }
 }
@@ -106,7 +126,10 @@ fun HiddenSalaryItem(
         Image(
             painter = painterResource(id = R.drawable.money),
             contentDescription = null,
-            modifier = Modifier.fillMaxSize().clickableNoRipple(onClick).padding(32.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .clickableNoRipple(onClick)
+                .padding(32.dp)
         )
     }
 }
@@ -127,7 +150,9 @@ fun VisibleSalaryItem(
         Text(
             text = salary.value.toPlainString(),
             style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.clickableNoRipple(onClick).padding(horizontal = 48.dp, vertical = 24.dp)
+            modifier = Modifier
+                .clickableNoRipple(onClick)
+                .padding(horizontal = 48.dp, vertical = 24.dp)
         )
     }
 }
