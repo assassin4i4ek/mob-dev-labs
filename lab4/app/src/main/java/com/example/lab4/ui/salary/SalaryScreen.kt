@@ -6,7 +6,7 @@ import androidx.compose.animation.core.AnimationConstants
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,16 +38,14 @@ import com.example.lab4.ui.utils.clickableNoRipple
 
 
 @Composable
-fun SalaryScreen(salary: Salary) {
+fun SalaryScreen(salary: Salary, onReturnClick: () -> Unit) {
     Surface(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp, 64.dp)) {
         Column {
             Spacer(modifier = Modifier.height(128.dp))
             SalaryDisplay(salary)
-            ReturnButton(
-                onClick = {}
-            )
+            ReturnButton(onClick = onReturnClick)
         }
     }
 }
@@ -74,7 +72,7 @@ fun SalaryDisplay(salary: Salary, modifier: Modifier = Modifier) {
                     animationSpec = tween(delayMillis = AnimationConstants.DefaultDurationMillis)
                 )
                 val exit = scaleOut()
-                enter with exit
+                enter togetherWith exit
             },
             label = "salary"
         ) {targetIsSalaryHidden ->
@@ -183,7 +181,7 @@ fun SalaryScreenPreview() {
 
     Lab4Theme {
         Surface {
-            SalaryScreen(salary)
+            SalaryScreen(salary = salary, onReturnClick = {})
         }
     }
 }
